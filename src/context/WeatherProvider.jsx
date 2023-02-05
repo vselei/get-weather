@@ -23,12 +23,12 @@ const WeatherProvider = ({ children }) => {
 
       const appId = import.meta.env.VITE_API_KEY;
 
-      const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${appId}`;
+      const url = encodeURI(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${appId}`);
 
       const { data: response } = await axios(url);
       const { lat, lon } = response[0];
 
-      const weatherUrl = `https://api.openweathermap.org/data/3.0/weather?lat=${lat}&lon=${lon}&appid=${appId}`;
+      const weatherUrl = encodeURI(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appId}`);
 
       const { data: weather } = await axios(weatherUrl);
       setResult(weather);
