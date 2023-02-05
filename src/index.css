@@ -18,6 +18,7 @@ header h1 {
 .two-columns {
   display: grid;
   gap: 4rem;
+  grid-template-columns: 1fr;
 }
 @media (min-width: 768px) {
   .two-columns {
