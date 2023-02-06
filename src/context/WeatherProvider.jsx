@@ -10,6 +10,7 @@ const WeatherProvider = ({ children }) => {
   });
   const [result, setResult] = useState({});
   const [loading, setLoading] = useState(false);
+  const [noResult, setNoResult] = useState('');
 
   const searchedData = e => {
     setSearch({
@@ -20,6 +21,7 @@ const WeatherProvider = ({ children }) => {
 
   const weatherRequest = async data => {
     setLoading(true);
+    setNoResult('');
     try {
       const { city, country } = data;
 
@@ -39,7 +41,7 @@ const WeatherProvider = ({ children }) => {
       const { data: weather } = await axios(weatherUrl);
       setResult(weather);
     } catch (error) {
-      console.error(error);
+      setNoResult('Não tem resultados');
     } finally {
       setLoading(false);
     }
@@ -52,7 +54,8 @@ const WeatherProvider = ({ children }) => {
         searchedData,
         weatherRequest,
         result,
-        loading
+        loading,
+        noResult
       }}
     >
       {children}

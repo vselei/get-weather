@@ -4,13 +4,13 @@ import Result from './Result';
 import Spinner from './Spinner';
 
 const Weather = () => {
-  const { result, loading } = useWeather();
+  const { result, loading, noResult } = useWeather();
 
   return (
     <>
       <main className="two-columns">
         <Form />
-        {loading ? <Spinner /> : result?.name && <Result />}
+        {loading ? <Spinner /> : result?.name && !noResult ? <Result /> : <p>{noResult}</p>}
       </main>
     </>
   );
